@@ -1,0 +1,18 @@
+# Ignore the .env file (contains sensitive data)
+.env
+
+# Ignore Python bytecode
+*.py[cod]
+__pycache__/
+*.pyo
+
+# Ignore the virtual environment directory
+venv/
+env/
+
+# Ignore IDE specific files
+.idea/
+.vscode/
+
+# Ignore local SQLite databases (if any)
+*.sqlite3

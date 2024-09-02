@@ -1,0 +1,112 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Dashboard</title>
+    <style>
+        body {
+            background-color: #001f54;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .dashboard-container {
+            background-color: #003585;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            width: 98%;
+            max-width: 1200px;
+            text-align: center;
+            overflow-x: auto;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #00ff7f;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        th, td {
+            border: 1px solid #004d99;
+            padding: 5px;
+            text-align: left;
+        }
+        th {
+            background-color: #005fb8;
+            color: #ffffff;
+        }
+        td {
+            background-color: #002f6c;
+            color: #cceeff;
+        }
+        .powered-by {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Wallet Dashboard</h1>
+
+        <h2>Total USD Value: ${{ total_usd_value|floatformat:2|intcomma }}</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Wallet Name</th>
+                    <th>Wallet Address</th>
+                    <th>Total USD Value (Including Staked)</th>
+                    <th>Staked USD Value</th>
+                    <th>USD Value</th>
+                    <th>Token Name</th>
+                    <th>Token Price</th>
+                    <th>Token Amount</th>
+                    <th>Staking Pool</th>
+                    <th>Staked Balance</th>
+                    <th>Staked Rewards</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for wallet in wallet_data %}
+                <tr>
+                    <td>{{ wallet.3 }}</td> <!-- Wallet Name -->
+                    <td>{{ wallet.4 }}</td> <!-- Wallet Address -->
+                    <td>${{ wallet.0|floatformat:2|intcomma }}</td> <!-- Total USD Value (Including Staked) -->
+                    <td>${{ wallet.2|floatformat:2|intcomma }}</td> <!-- Staked USD Value -->
+                    <td>${{ wallet.1|floatformat:2|intcomma }}</td> <!-- USD Value -->
+                    <td>{{ wallet.5 }}</td> <!-- Token Name -->
+                    <td>${{ wallet.6|floatformat:8|intcomma }}</td> <!-- Token Price -->
+                    <td>{{ wallet.7|floatformat:8|intcomma }}</td> <!-- Token Amount -->
+                    <td>{{ wallet.8 }}</td> <!-- Staking Pool -->
+                    <td>{{ wallet.9|floatformat:8|intcomma }}</td> <!-- Staked Balance -->
+                    <td>{{ wallet.10|floatformat:8|intcomma }}</td> <!-- Staked Rewards -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="powered-by">
+            Powered by ApeCoin DAO Governance Working Group
+        </div>
+    </div>
+</body>
+</html>
